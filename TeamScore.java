@@ -36,7 +36,13 @@ public class TeamScore {
         int team1Score = 0;
         int team2Score = 0;
 
-        for (int i = 0; i < 4; i++) {
+        int rounds = 0;
+
+        System.out.println("Enter how many rounds you would like to play: ");
+        rounds = Integer.parseInt(in.nextLine());
+
+
+        for (int i = 0; i < rounds; i++) {
             System.out.println("Enter Team 1 points: ");
             t1Array[i] = Integer.parseInt(in.nextLine());
             System.out.println("Enter Team 2 points: ");
