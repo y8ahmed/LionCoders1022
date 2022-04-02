@@ -30,5 +30,14 @@ public class TeamScore {
             System.out.println("Enter Team 2 points: ");
             t2Array[i] = Integer.parseInt(in.nextLine());
         }
+        if (team1Score > team2Score){
+            System.out.println("Team 1 won");
+        }else if (team2Score > team1Score){
+            System.out.println("Team 2 won");
+        }else if (team1Score == team2Score){
+            System.out.println("Tie");
+        }else{
+            System.out.println("Error");
+        }
     }
 }
