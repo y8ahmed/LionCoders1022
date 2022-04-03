@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import java.util.Random;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,8 @@ public class GameActivity extends AppCompatActivity {
     int answer;
     int rounds;
 
+    int theme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +31,18 @@ public class GameActivity extends AppCompatActivity {
         max = i.getIntExtra("max", 0);
         min = i.getIntExtra("min", 10);
         times = i.getIntExtra("times", 8);
+        theme = i.getIntExtra("theme", 1);
         answer = getRandomNumberGen(min, max);
+
+        if (theme == 1) {
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#ffffff"));
+        } else if (theme == 2) {
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FAD5A5"));
+        } else if (theme == 3) {
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#1a4810"));
+        } else if (theme == 4) {
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#005b96"));
+        }
 
         Log.d("GameActivity", String.format("onCreate max=%d min=%d times=%d secret=%d", max, min, times, answer));
         rounds = times;
@@ -57,6 +72,7 @@ public class GameActivity extends AppCompatActivity {
             intent.putExtra("status", "won");
             intent.putExtra("answer", answer);
             intent.putExtra("score", Integer.toString((rounds/times)*100));
+            intent.putExtra("theme", theme);
             Log.d("GameActivity",String.format("CheckGuess(winner) status=%s answer=%d ", "won", answer));
             startActivity(intent);
         } else {
@@ -70,6 +86,7 @@ public class GameActivity extends AppCompatActivity {
                 intent.putExtra("status", "lost");
                 intent.putExtra("answer", answer);
                 intent.putExtra("score", "0");
+                intent.putExtra("theme", theme);
                 Log.d("GameActivity",String.format("CheckGuess(loser) status=%s answer=%d", "lost", answer));
                 startActivity(intent);
             } else {
